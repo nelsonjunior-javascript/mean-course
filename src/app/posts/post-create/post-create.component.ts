@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { Post } from '../post.model';
+import { PostsService } from '../posts.service';
 
 @Component({
   selector: 'app-post-create',
@@ -9,7 +10,8 @@ import { Post } from '../post.model';
   styleUrls: ['./post-create.component.css'],
 })
 export class PostCreateComponent {
-  @Output() postCreatedEvent = new EventEmitter<Post>();
+
+  constructor(public postsService: PostsService){}
 
   onAddPost(form: NgForm) {
     if (form.invalid) {
@@ -21,7 +23,8 @@ export class PostCreateComponent {
       content: form.value.content,
     };
 
-    //Creates an event to be listened in the parent component trough the @Output annotation in the property
-    this.postCreatedEvent.emit(post);
+    this.postsService.addPost(form.value.title, form.value.content);
+
+    form.resetForm();
   }
 }
