@@ -22,7 +22,7 @@ export class PostListComponent implements OnInit, OnDestroy{
   constructor(public postsService: PostsService) {}
 
   ngOnInit(): void {
-    this.posts = this.postsService.getPosts();
+    this.postsService.getPosts();
 
     //The first argument (next) of the Observable object is called whenever a new value is received
     //Arguments order: next(), error() and complete()
