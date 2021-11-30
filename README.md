@@ -1,5 +1,5 @@
 
-# mean-course
+# mean-course-angular
 
 # MeanCourse
 
