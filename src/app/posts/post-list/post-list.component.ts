@@ -16,12 +16,14 @@ export class PostListComponent implements OnInit, OnDestroy{
   //     {title: 'Third Post!', content: 'This is the third post\s content'},
   // ];
 
+  isLoading = false;
   posts: Post[] = [];
   private postsSub: Subscription;
 
   constructor(public postsService: PostsService) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.postsService.getPosts();
 
     //The first argument (next) of the Observable object is called whenever a new value is received
@@ -29,6 +31,7 @@ export class PostListComponent implements OnInit, OnDestroy{
     this.postsSub = this.postsService
       .getPostsUpdatedListener()
       .subscribe((posts: Post[]) => {
+        this.isLoading = false;
         this.posts = posts;
       });
   }
